@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
   final String text;
+  final Function onPressed;
 
-  ActionButton({@required this.text});
+  ActionButton({@required this.text, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ActionButton extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           )),
           color: Color(0xFF732128)),
-      onPressed: () => true,
+      onPressed: () => this.onPressed,
     );
   }
 }
