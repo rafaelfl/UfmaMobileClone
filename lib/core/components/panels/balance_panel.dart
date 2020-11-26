@@ -12,6 +12,13 @@ class _BalancePanelState extends State<BalancePanel> {
 
   double currentBalance = 0.0;
 
+  @override
+  void initState() {
+    super.initState();
+
+    // inicialização do widget
+  }
+
   void addBalance() {
     setState(() {
       this.currentBalance += 10.0;
