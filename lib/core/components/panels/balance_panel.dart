@@ -7,7 +7,22 @@ class BalancePanel extends StatefulWidget {
 }
 
 class _BalancePanelState extends State<BalancePanel> {
+  // TODO: baixar info da Internet
+  // https://flutter.dev/docs/cookbook/networking/fetch-data
+
   double currentBalance = 0.0;
+
+  void addBalance() {
+    setState(() {
+      this.currentBalance += 10.0;
+    });
+  }
+
+  void resetBalance() {
+    setState(() {
+      this.currentBalance = 0.0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +36,15 @@ class _BalancePanelState extends State<BalancePanel> {
             Text("R\$ ${this.currentBalance}",
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400)),
             SizedBox(height: 35),
-            ActionButton(text: "${this.currentBalance}"),
+            ActionButton(
+              text: "Adicionar saldo",
+              onPressed: () => this.addBalance(),
+            ),
+            SizedBox(height: 10),
+            ActionButton(
+              text: "Torrar saldo 🍞",
+              onPressed: () => this.resetBalance(),
+            ),
             SizedBox(height: 35),
             Text("Últimas transações",
                 style: TextStyle(

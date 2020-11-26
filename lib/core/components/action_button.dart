@@ -13,11 +13,11 @@ class ActionButton extends StatelessWidget {
           height: 45,
           child: Center(
               child: Text(
-            "Adicionar saldo",
+            this.text,
             style: TextStyle(color: Colors.white),
           )),
           color: Color(0xFF732128)),
-      onPressed: () => this.onPressed,
+      onPressed: this.onPressed,
     );
   }
 }
