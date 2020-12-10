@@ -1,35 +1,42 @@
 import 'package:UfmaMobileClone/core/components/action_button.dart';
+import 'package:UfmaMobileClone/store/balance_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
-class BalancePanel extends StatefulWidget {
-  @override
-  _BalancePanelState createState() => _BalancePanelState();
-}
+class BalancePanel extends StatelessWidget {
+// class BalancePanel extends StatefulWidget {
+//   @override
+//   _BalancePanelState createState() => _BalancePanelState();
+// }
 
-class _BalancePanelState extends State<BalancePanel> {
+// class _BalancePanelState extends State<BalancePanel> {
   // TODO: baixar info da Internet
   // https://flutter.dev/docs/cookbook/networking/fetch-data
 
-  double currentBalance = 0.0;
+  // double currentBalance = 0.0;
 
-  @override
-  void initState() {
-    super.initState();
+  final BalanceStore balanceStore;
 
-    // inicialização do widget
-  }
+  const BalancePanel({@required this.balanceStore});
 
-  void addBalance() {
-    setState(() {
-      this.currentBalance += 10.0;
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
 
-  void resetBalance() {
-    setState(() {
-      this.currentBalance = 0.0;
-    });
-  }
+  //   // inicialização do widget
+  // }
+
+  // void addBalance() {
+  // setState(() {
+  //   this.currentBalance += 10.0;
+  // });
+  // }
+
+  // void resetBalance() {
+  // setState(() {
+  //   this.currentBalance = 0.0;
+  // });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +47,24 @@ class _BalancePanelState extends State<BalancePanel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("R\$ ${this.currentBalance}",
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400)),
+            Observer(builder: (_) {
+              return Text("R\$ ${this.balanceStore.balance}",
+                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400));
+            }),
             SizedBox(height: 35),
             ActionButton(
               text: "Adicionar saldo",
-              onPressed: () => this.addBalance(),
+              onPressed: () => this.balanceStore.addBalance(),
             ),
             SizedBox(height: 10),
             ActionButton(
               text: "Torrar saldo 🍞",
-              onPressed: () => this.resetBalance(),
+              onPressed: () => this.balanceStore.resetBalance(),
+            ),
+            SizedBox(height: 10),
+            ActionButton(
+              text: "Vai para a tela de saldo ⚽️",
+              onPressed: () => Navigator.pushNamed(context, "/balance"),
             ),
             SizedBox(height: 35),
             Text("Últimas transações",
